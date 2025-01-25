@@ -62,7 +62,13 @@
                 payment_token.name = "payment_token";
                 payment_token.value = response.token;
                 checkout.appendChild(payment_token);
-                checkout.submit();
+                
+                // Always start 3DS authentication
+                threeDSecureUI.start({
+                    amount: '<?= PAY_AMOUNT ?>',
+                    currency: '<?= PAY_CURRENCY ?>',
+                    card: response.card
+                });
             }
         });
     });
